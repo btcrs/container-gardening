@@ -1,2 +1,2 @@
 # container-gardening
-Dockerized IOT Components
+Dockerized IOT components used to collect data on my hydroponic garden.
