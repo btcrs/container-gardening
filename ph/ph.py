@@ -25,3 +25,9 @@ class Ph():
         if ph is not None:
             print "Ph: ", val
         return ph
+
+    def update_record(self):
+        '''
+        Send a message to the api
+        '''
+        pass
