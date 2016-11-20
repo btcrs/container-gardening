@@ -16,11 +16,11 @@ class Pumps():
             print "Good Ph!"
 
     def dispense_acid(self):
-	    self.controller.set_motors(0, 0, 1, 0)
+	self.controller.set_motors(0, 0, 1, 0)
     	time.sleep(1)
     	self.controller.stop()
 
     def dispense_alkali(self):
-	    self.controller.set_motors(1, 0, 0, 0)
+	self.controller.set_motors(1, 0, 0, 0)
     	time.sleep(1)
     	self.controller.stop()
