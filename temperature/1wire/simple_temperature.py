@@ -14,7 +14,9 @@ def job():
 def send_data(temperature):
     entry = json.dumps({'parameter': 'temperature', 'value': str(temperature)})
     url = (os.environ['API'] + '/dev/datum')
-    requests.post(url, data=entry)
+    print(url)
+    r = requests.post(url, data=entry)
+    print(r.status_code)
 
 schedule.every(1).minutes.do(job)
 
