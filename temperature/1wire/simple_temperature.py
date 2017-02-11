@@ -7,18 +7,14 @@ import os
 
 def job():
     for sensor in w1thermsensor.W1ThermSensor.get_available_sensors():
-        temperature = sensor.get_temperature()
-        print("Sensor %s has temperature %.2f" % (sensor.id, temperature))
-        send_data(temperature)
+        send_data(sensor.get_temperature())
 
 def send_data(temperature):
     entry = json.dumps({'parameter': 'temperature', 'value': str(temperature)})
     url = (os.environ['API'] + '/dev/datum')
-    print(url)
-    r = requests.post(url, data=entry)
-    print(r.status_code)
+    requests.post(url, data=entry)
 
-schedule.every(1).minutes.do(job)
+schedule.every(15).minutes.do(job)
 
 while True:
     schedule.run_pending()
