@@ -4,7 +4,6 @@ import smbus
 
 tcs = Adafruit_TCS34725.TCS34725()
 tcs.set_interrupt(False)
-#tcs = Adafruit_TCS34725.TCS34725(address=0x30, busnum=2)
 
 r, g, b, c = tcs.get_raw_data()
 color_temp = Adafruit_TCS34725.calculate_color_temperature(r, g, b)

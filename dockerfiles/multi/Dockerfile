@@ -11,10 +11,14 @@ RUN apt-get update && apt-get install -y \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
-RUN pip install schedule 
+RUN pip install schedule
+RUN git clone https://github.com/adafruit/Adafruit_Python_GPIO.git
+RUN cd Adafruit_Python_GPIO
+RUN sudo python setup.py install
+
 RUN git clone https://github.com/btcrs/container-gardening.git /data/container-gardening
 
 WORKDIR /data
 VOLUME /data
 
-CMD ["python", "/data/container-gardening/multi/logger.py"]
+CMD ["python", "/data/container-gardening/multi/multi.py"]

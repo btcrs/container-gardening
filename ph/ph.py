@@ -10,7 +10,7 @@ class Ph():
         try:
             line = ""
             while True:
-                data = ser.read()
+                data = self.serial.read()
                 if data == "\r":
                     return line
                 else:
@@ -20,10 +20,10 @@ class Ph():
             return None
 
     def poll(self):
-        ser.write("R\r")
-        ph = read_ph()
+        self.serial.write("R\r")
+        ph = self.read_ph()
         if ph is not None:
-            print "Ph: ", val
+            print "Ph: ", ph
         return ph
 
     def update_record(self):

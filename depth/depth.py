@@ -13,10 +13,10 @@ class depth_sensor:
         reading = self.get_raw_adc()
         depth = (reading-self.dry)/self.inch
         return depth if depth > 0.0 else 0
-   
+
     def get_raw_adc(self):
         return float(self.mcp.read_adc(0))
-   
+
 sensor = depth_sensor(0, 0)
 while True:
     print(str(sensor.get_depth()) + " inches")
