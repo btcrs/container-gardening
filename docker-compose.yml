@@ -1,0 +1,50 @@
+version: '2'
+services:
+  temperature:
+    build: ./dockerfiles/temperature/1wire/
+    privileged: true
+    devices:
+     - /dev/ttyAMA0:/dev/ttyAMA0
+     - /dev/mem:/dev/mem
+    volumes:
+     - /data
+  uv:
+    build: ./dockerfiles/uv/lux/
+    privileged: true
+    devices:
+     - /dev/ttyAMA0:/dev/ttyAMA0
+     - /dev/mem:/dev/mem
+    volumes:
+     - /data
+  flow:
+    build: ./dockerfiles/flow/
+    privileged: true
+    devices:
+     - /dev/ttyAMA0:/dev/ttyAMA0
+     - /dev/mem:/dev/mem
+    volumes:
+     - /data
+  multi:
+    build: ./dockerfiles/multi/
+    privileged: true
+    devices:
+     - /dev/ttyAMA0:/dev/ttyAMA0
+     - /dev/mem:/dev/mem
+    volumes:
+     - /data
+  depth:
+    build: ./dockerfiles/depth/
+    privileged: true
+    devices:
+     - /dev/ttyAMA0:/dev/ttyAMA0
+     - /dev/mem:/dev/mem
+    volumes:
+     - /data
+  depth:
+    build: ./dockerfiles/pressure/5803
+    privileged: true
+    devices:
+     - /dev/ttyAMA0:/dev/ttyAMA0
+     - /dev/mem:/dev/mem
+    volumes:
+     - /data
