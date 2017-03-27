@@ -14,7 +14,7 @@ def get_data():
     pressure = weather.pressure()
     reporter.send_data("temperature", temperature)
 
-    schedule.every(1).minutes.do(get_data)
+schedule.every(1).minutes.do(get_data)
 
 while True:
     schedule.run_pending()

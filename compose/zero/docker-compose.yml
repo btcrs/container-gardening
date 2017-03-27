@@ -1,0 +1,32 @@
+version: '2'
+services:
+  temperature:
+    environment:
+     - GARDENER
+    build: ../../dockerfiles/temperature/temperature/
+    privileged: true
+    devices:
+     - /dev/ttyAMA0:/dev/ttyAMA0
+     - /dev/mem:/dev/mem
+    volumes:
+     - /data
+  uv:
+    environment:
+     - GARDENER
+    build: ../../dockerfiles/uv/light/
+    privileged: true
+    devices:
+     - /dev/ttyAMA0:/dev/ttyAMA0
+     - /dev/mem:/dev/mem
+    volumes:
+     - /data
+  pressure:
+    environment:
+     - GARDENER
+    build: ../../dockerfiles/pressure/pressure
+    privileged: true
+    devices:
+     - /dev/ttyAMA0:/dev/ttyAMA0
+     - /dev/mem:/dev/mem
+    volumes:
+     - /data
