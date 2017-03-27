@@ -9,4 +9,7 @@ class reporter:
 
     def send_data(self, parameter, value):
         entry = {'parameter': str(parameter), 'value': str(value)}
-        requests.post(self.url, json=entry)
+        try:
+            requests.post(self.url, json=entry)
+	except requests.exceptions.RequestException as e:
+	    print e
