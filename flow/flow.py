@@ -1,6 +1,12 @@
 import time
+import schedule
 import random
 import RPi.GPIO as GPIO
+import sys
+sys.path.insert(0, '../reporter')
+from reporter import reporter
+
+reporter = reporter()
 
 class flow_sensor():
 
@@ -19,6 +25,7 @@ class flow_sensor():
         if (self.click_delta < 1000):
 	        self.hertz = flow_sensor.milliseconds / self.click_delta
 	        self.flow = self.hertz / (60 * 7.5)  # Liters/S
+                print self.flow
         self.last_click = current_time
 
     def get_flow(self):
@@ -30,9 +37,15 @@ def click(channel):
     current_time = int(time.time() * flow_sensor.milliseconds)
     fm.update(current_time)
 
+def get_data():
+    reporter.send_data("flow", fm.flow)
+
+schedule.every(1).minutes.do(get_data)
+
 if __name__ == "__main__":
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(21,GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.add_event_detect(21, GPIO.RISING, callback=click, bouncetime=20)
     while True:
-        pass
+        schedule.run_pending()
+        time.sleep(.1)
