@@ -11,5 +11,5 @@ class reporter:
         entry = {'parameter': str(parameter), 'value': str(value)}
         try:
             requests.post(self.url, json=entry)
-	except requests.exceptions.RequestException as e:
-	    print e
+        except requests.exceptions.RequestException as e:
+            print e
