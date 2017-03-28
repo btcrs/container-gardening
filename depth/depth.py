@@ -1,6 +1,11 @@
 import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
+import schedule
 import time
+import sys
+sys.path.insert(0, '../reporter')
+
+from reporter import reporter
 
 class depth_sensor:
 
@@ -18,6 +23,12 @@ class depth_sensor:
         return float(self.mcp.read_adc(0))
 
 sensor = depth_sensor(0, 0)
+def get_data():
+    inches = sensor.get_depth()
+    reporter.send_data("depth", depth)
+
+schedule.every(1).minutes.do(get_data)
+
 while True:
-    print(str(sensor.get_depth()) + " inches")
-    time.sleep(0.5)
+    schedule.run_pending()
+    time.sleep(1)
