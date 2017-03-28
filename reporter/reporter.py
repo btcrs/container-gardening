@@ -12,4 +12,4 @@ class reporter:
         try:
             requests.post(self.url, json=entry)
         except requests.exceptions.RequestException as e:
-            print e
+            print(e)
