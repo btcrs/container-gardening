@@ -15,7 +15,7 @@ RUN pip install schedule
 RUN pip install pyserial
 
 
-RUN git clone https://github.com/btcrs/container-gardening.git /data/container-gardening #noZ
+RUN git clone https://github.com/btcrs/container-gardening.git /data/container-gardening
 ENV PYTHONPATH="${PYTHONPATH}:/data/container-gardening/reporter/"
 
 # Define working directory
