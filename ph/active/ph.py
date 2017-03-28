@@ -22,8 +22,6 @@ class Ph():
     def poll(self):
         self.serial.write("R\r")
         ph = self.read_ph()
-        if ph is not None:
-            print "Ph: ", ph
         return ph
 
     def update_record(self):
