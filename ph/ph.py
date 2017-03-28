@@ -3,16 +3,19 @@ import time
 import schedule
 import sys
 sys.path.insert(0, '../reporter')
+sys.path.insert(0, './active')
 from reporter import reporter
-from active import ph
+from ph import Ph
 
 reporter = reporter()
-ph = ph.Ph()
+ph = Ph()
 
 def get_data():
-    pH = ph.poll()
-    print(pH)
-    reporter.send_data("ph", pH)
+    try:
+        pH = ph.poll()
+        reporter.send_data("ph", pH)
+    except:
+        print "pH Offline..."
 
 schedule.every(1).minutes.do(get_data)
 
