@@ -9,12 +9,21 @@ sensor = am2315.Sensor()
 reporter= reporter()
 
 def report_temperature():
-    temperature = sensor.temperature(True)
-    reporter.send_data("temperature", temperature)
+    try:
+        temperature = sensor.temperature(True)
+        if temperature:
+            reporter.send_data("temperature", temperature)
+    except:
+        pass
+     
 
 def report_humidity():
-    humidity = sensor.humidity()
-    reporter.send_data("humidity", humidity)
+    try:
+        humidity = sensor.humidity()
+        if humidity:
+            reporter.send_data("humidity", humidity)
+    except:
+        pass
 
 def get_data():
     report_temperature()
