@@ -1,11 +1,12 @@
-from aosong import am2315
+import am2315
 import schedule
 import time
-sensor = am2315.Sensor()
 import sys
 sys.path.insert(0, '../reporter')
-
 from reporter import reporter
+
+sensor = am2315.Sensor()
+reporter= reporter()
 
 def report_temperature():
     temperature = sensor.temperature(True)
