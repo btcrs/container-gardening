@@ -34,21 +34,13 @@ bus.write_byte(0x77, 0x40)
 
 time.sleep(0.5)
 
-# Read digital pressure value
-# Read data back from 0x00(0), 3 bytes
-# D1 MSB2, D1 MSB1, D1 LSB
 value = bus.read_i2c_block_data(0x77, 0x00, 3)
 D1 = value[0] * 65536 + value[1] * 256 + value[2]
 
-# MS5803_14BA address, 0x77(119)
-#		0x50(64)	Temperature conversion(OSR = 256) command
 bus.write_byte(0x77, 0x50)
 
 time.sleep(0.5)
 
-# Read digital temperature value
-# Read data back from 0x00(0), 3 bytes
-# D2 MSB2, D2 MSB1, D2 LSB
 value = bus.read_i2c_block_data(0x77, 0x00, 3)
 D2 = value[0] * 65536 + value[1] * 256 + value[2]
 
@@ -79,7 +71,6 @@ pressure = ((((D1 * SENS) / 2097152) - OFF) / 32768.0) / 100.0
 cTemp = TEMP / 100.0
 fTemp = cTemp * 1.8 + 32
 
-# Output data to screen
 print "Pressure : %.2f mbar" %pressure
 print "Temperature in Celsius : %.2f C" %cTemp
 print "Temperature in Fahrenheit : %.2f F" %fTemp
