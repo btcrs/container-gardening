@@ -1,0 +1,12 @@
+version: '2'
+services:
+  ph:
+    environment:
+     - GARDENER
+    build: ../../dockerfiles/ph/
+    privileged: true
+    devices:
+     - /dev/ttyAMA0:/dev/ttyAMA0
+     - /dev/mem:/dev/mem
+    volumes:
+     - /data
