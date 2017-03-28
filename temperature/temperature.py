@@ -12,7 +12,7 @@ reporter = reporter()
 
 def get_data():
     temperature = weather.temperature()
-    reporter.send_data("temperature", temperature)
+    reporter.send_data("temperature", '{0:0.3f}'.format(temperature))
 
 schedule.every(1).minutes.do(get_data)
 

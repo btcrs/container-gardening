@@ -12,7 +12,7 @@ reporter = reporter()
 
 def get_data():
     pressure = weather.pressure()
-    reporter.send_data("pressure", pressure)
+    reporter.send_data("pressure", '{0:0.3f}'.format(pressure))
 
 schedule.every(1).minutes.do(get_data)
 
