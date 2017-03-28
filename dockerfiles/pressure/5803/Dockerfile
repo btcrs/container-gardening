@@ -14,8 +14,10 @@ RUN apt-get update && apt-get install -y \
     rm -rf /var/lib/apt/lists/*
 
 RUN pip install smbus-cffi
+ENV PYTHONPATH="${PYTHONPATH}:/data/container-gardening/reporter/"
 
 RUN git clone https://github.com/btcrs/container-gardening.git /data/container-gardening
+ENV PYTHONPATH="${PYTHONPATH}:/data/container-gardening/reporter/"
 
 WORKDIR /data
 VOLUME /data

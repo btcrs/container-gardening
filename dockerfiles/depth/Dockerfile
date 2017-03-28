@@ -15,6 +15,7 @@ RUN pip install adafruit-mcp3008
 RUN pip install schedule 
 
 RUN git clone https://github.com/btcrs/container-gardening.git /data/container-gardening
+ENV PYTHONPATH="${PYTHONPATH}:/data/container-gardening/reporter/"
 
 # Define working directory
 WORKDIR /data
