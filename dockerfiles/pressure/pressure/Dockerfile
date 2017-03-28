@@ -7,13 +7,14 @@ RUN apt-get update && apt-get install -y \
     python \
     python-dev \
     python-pip \
+    python-smbus \
     python-virtualenv \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
 RUN pip install schedule 
 RUN pip install envirophat
-
+ENV PYTHONPATH="${PYTHONPATH}:/data/container-gardening/reporter/"
 RUN git clone https://github.com/btcrs/container-gardening.git /data/container-gardening
 
 # Define working directory
