@@ -2,6 +2,7 @@ from flask import Flask, request
 from flask_restful import Resource, Api
 from tinydb import TinyDB, Query
 from json import dumps, loads
+from pprint import pprint
 import os
 
 db = TinyDB('tiny.json')
@@ -13,10 +14,11 @@ api = Api(app)
 class data(Resource):
     def post(self):
         db.insert(request.json)
-        if len(db.all()) >= 5:
+        if len(db.all()) >= 20:
+            pprint(db.all())
             db.purge()
         #requests.post(self.url, data=entry)
-        return data
+        return request.json 
 
     def get(self):
         return db.all()
