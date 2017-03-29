@@ -1,21 +1,31 @@
-#!/usr/bin/env python
-import time
-import schedule
-import sys
-sys.path.insert(0, '../reporter')
-from reporter import reporter
-from active import ph
+import serial
 
-reporter = reporter()
-ph = ph.Ph()
+class Ph():
 
-def get_data():
-    pH = ph.poll()
-    print(pH)
-    reporter.send_data("ph", pH)
+    def __init__(self):
+        self.usbport = '/dev/ttyAMA0'
+        self.serial = serial.Serial(self.usbport, 9600, timeout=3)
 
-schedule.every(1).minutes.do(get_data)
+    def read_ph(self):
+        try:
+            line = ""
+            while True:
+                data = self.serial.read()
+                if data == "\r":
+                    return line
+                else:
+                    line = line + data
 
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+        except serial.SerialException as e:
+            return None
+
+    def poll(self):
+        self.serial.write("R\r")
+        ph = self.read_ph()
+        return ph
+
+    def update_record(self):
+        '''
+        Send a message to the api
+        '''
+        pass

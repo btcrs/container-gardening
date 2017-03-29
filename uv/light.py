@@ -12,7 +12,7 @@ reporter = reporter()
 
 def get_data():
     uv = light.light()
-    reporter.send_data("light", uv)
+    reporter.send_data("light", '{0:0.3f}'.format(uv))
 
 schedule.every(1).minutes.do(get_data)
 

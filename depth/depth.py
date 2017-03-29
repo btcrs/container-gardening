@@ -6,6 +6,7 @@ import sys
 sys.path.insert(0, '../reporter')
 
 from reporter import reporter
+reporter = reporter()
 
 class depth_sensor:
 
@@ -23,9 +24,13 @@ class depth_sensor:
         return float(self.mcp.read_adc(0))
 
 sensor = depth_sensor(0, 0)
+
 def get_data():
-    inches = sensor.get_depth()
-    reporter.send_data("depth", depth)
+    try:
+        inches = sensor.get_depth()
+        reporter.send_data("depth", inches)
+    except:
+        print "E-tape Offline..."
 
 schedule.every(1).minutes.do(get_data)
 

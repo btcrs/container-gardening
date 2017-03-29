@@ -1,6 +1,8 @@
 version: '2'
 services:
   temperature:
+    environment:
+     - GARDENER
     build: ../../dockerfiles/temperature/1wire/
     privileged: true
     devices:
@@ -9,6 +11,8 @@ services:
     volumes:
      - /data
   uv:
+    environment:
+     - GARDENER
     build: ../../dockerfiles/uv/lux/
     privileged: true
     devices:
@@ -17,6 +21,8 @@ services:
     volumes:
      - /data
   flow:
+    environment:
+     - GARDENER
     build: ../../dockerfiles/flow/
     privileged: true
     devices:
@@ -24,8 +30,10 @@ services:
      - /dev/mem:/dev/mem
     volumes:
      - /data
-  multi:
-    build: ../../dockerfiles/multi/
+  bme280:
+    environment:
+     - GARDENER
+    build: ../../dockerfiles/bme280/
     privileged: true
     devices:
      - /dev/ttyAMA0:/dev/ttyAMA0
@@ -33,6 +41,8 @@ services:
     volumes:
      - /data
   depth:
+    environment:
+     - GARDENER
     build: ../../dockerfiles/depth/
     privileged: true
     devices:
@@ -40,8 +50,10 @@ services:
      - /dev/mem:/dev/mem
     volumes:
      - /data
-  depth:
-    build: ../../dockerfiles/pressure/5803
+  humidity:
+    environment:
+     - GARDENER
+    build: ../../dockerfiles/humidity/
     privileged: true
     devices:
      - /dev/ttyAMA0:/dev/ttyAMA0

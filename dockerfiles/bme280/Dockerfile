@@ -13,12 +13,12 @@ RUN apt-get update && apt-get install -y \
 
 RUN pip install schedule
 RUN git clone https://github.com/adafruit/Adafruit_Python_GPIO.git
-RUN cd Adafruit_Python_GPIO
-RUN sudo python setup.py install
+RUN cd Adafruit_Python_GPIO && sudo python setup.py install
 
 RUN git clone https://github.com/btcrs/container-gardening.git /data/container-gardening
+ENV PYTHONPATH="${PYTHONPATH}:/data/container-gardening/reporter/"
 
 WORKDIR /data
 VOLUME /data
 
-CMD ["python", "/data/container-gardening/multi/multi.py"]
+CMD ["python", "/data/container-gardening/bme280/bme280.py"]
