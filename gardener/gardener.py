@@ -21,7 +21,7 @@ class data(Resource):
             db.purge()
         try:
            sent_request = self.send_data(request.json)
-        pass:
+        except:
             print(sent_request)
         return request.json 
 
