@@ -19,14 +19,18 @@ class data(Resource):
         if len(db.all()) >= 20:
             pprint(db.all())
             db.purge()
-        send_data(request.json)
+        try:
+           sent_request = self.send_data(request.json)
+        pass:
+            print(sent_request)
         return request.json 
 
     def get(self):
         return db.all()
 
 def send_data(self, entry):
-    requests.post(url, headers=headers, json=entry)
+    request = requests.post(url, headers=headers, json=entry)
+    print(request)
 
 api.add_resource(data, '/dev/datum')
 
