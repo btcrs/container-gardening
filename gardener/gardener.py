@@ -3,10 +3,12 @@ from flask_restful import Resource, Api
 from tinydb import TinyDB, Query
 from json import dumps, loads
 from pprint import pprint
+import requests
 import os
 
 db = TinyDB('tiny.json')
-#url = (os.environ['API'] + '/dev/datum')
+url = (os.environ['API'] + '/dev/datum')
+headers = {'x-api-key': os.environ['KEY'],'Content-Type': 'application/json'}
 
 app = Flask(__name__)
 api = Api(app)
@@ -17,13 +19,18 @@ class data(Resource):
         if len(db.all()) >= 20:
             pprint(db.all())
             db.purge()
-        #requests.post(self.url, data=entry)
+        send_data(request.json)
         return request.json 
 
     def get(self):
         return db.all()
 
+def send_data(self, entry):
+    requests.post(url, headers=headers, json=entry)
+
 api.add_resource(data, '/dev/datum')
 
 if __name__ == '__main__':
      app.run(host='0.0.0.0')
+
+
