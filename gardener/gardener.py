@@ -31,6 +31,8 @@ def send_data(self, entry):
     url = (os.environ['API'] + '/dev/datum')
     headers = {'x-api-key': os.environ['KEY'],'Content-Type': 'application/json'}
     request = requests.post(url, headers=headers, json=entry)
+    print(request)
+    return request
 
 api.add_resource(data, '/dev/datum')
 
