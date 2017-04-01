@@ -21,6 +21,8 @@ class data(Resource):
             db.purge()
         try:
            sent_request = self.send_data(request.json)
+           print(url)
+           print(sent_request)
         except:
             print("API call failed...")
         return request.json 
