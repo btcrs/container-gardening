@@ -22,7 +22,7 @@ class data(Resource):
         try:
            sent_request = self.send_data(request.json)
         except:
-            print(sent_request)
+            print("API call failed...")
         return request.json 
 
     def get(self):
