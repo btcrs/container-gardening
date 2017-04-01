@@ -7,8 +7,6 @@ import requests
 import os
 
 db = TinyDB('tiny.json')
-url = (os.environ['API'] + '/dev/datum')
-headers = {'x-api-key': os.environ['KEY'],'Content-Type': 'application/json'}
 
 app = Flask(__name__)
 api = Api(app)
@@ -21,7 +19,6 @@ class data(Resource):
             db.purge()
         try:
            sent_request = self.send_data(request.json)
-           print(url)
            print(sent_request)
         except:
             print("API call failed...")
@@ -31,8 +28,9 @@ class data(Resource):
         return db.all()
 
 def send_data(self, entry):
+    url = (os.environ['API'] + '/dev/datum')
+    headers = {'x-api-key': os.environ['KEY'],'Content-Type': 'application/json'}
     request = requests.post(url, headers=headers, json=entry)
-    print(request)
 
 api.add_resource(data, '/dev/datum')
 
